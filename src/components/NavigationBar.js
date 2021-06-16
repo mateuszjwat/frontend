@@ -1,17 +1,15 @@
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import {Form} from 'react-bootstrap';
-import { LinkContainer} from 'react-router-bootstrap';
-import {Link} from 'react-router-dom';
+import {LinkContainer} from 'react-router-bootstrap';
 
 function NavigationBar(props) {
 
     let loginNav = <Navbar.Brand>Login</Navbar.Brand>;
-    console.log("z navBara: ");
     if (!props.user.loggedIn){
-        console.log("z navBara: niezalogowany");
+        //console.log("z navBara: niezalogowany");
         loginNav = <Navbar.Brand>Login</Navbar.Brand>;
     } else{
-        console.log("z navBara: zalogowany");
+        //console.log("z navBara: zalogowany");
         loginNav = <Navbar.Brand>LogOut</Navbar.Brand>;
     }
 
@@ -20,6 +18,11 @@ function NavigationBar(props) {
         <LinkContainer to="/">
             <Navbar.Brand>Home</Navbar.Brand>
         </LinkContainer>
+        <Nav className="mr-auto">
+            <LinkContainer to="/PublicFiszki">
+                <Nav.Link>Fiszki</Nav.Link>
+            </LinkContainer>
+        </Nav>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
