@@ -4,20 +4,24 @@ import {Card, Button, Carousel, Row, Col, Spinner} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap';
 import {MyFetch} from './CustomFetch'
 import {useHistory} from 'react-router-dom'
+import FiszkaApi from './Fiszki/FiszkaApi';
   
 function PublicFiszki (props){
     const [items, setItems] = useState(null);
     let history = useHistory();
 
-      MyFetch("https://60c928797dafc90017ffc3bc.mockapi.io/api/fiszka", setItems);
-
-      function chooseSet(fiszka){
-        console.log(fiszka);
-        props.setFiszka(fiszka);
-        history.push('/fiszkaSite');
+    function chooseSet(fiszka){
+      console.log(fiszka);
+      props.setFiszka(fiszka);
+      history.push('/fiszkaSite');
     }
 
       if (items == null) {
+        FiszkaApi.getPublic().then(res => {
+          setItems(res.data);
+        })
+
+
         return (
         <div>
           <MyCarousel/>
@@ -41,6 +45,11 @@ function PublicFiszki (props){
                   Choose Set
                 </Button>
             </Card.Body>
+                <footer className="blockquote-footer pull-right">
+                    <small className="text-muted">
+                      {item.owner}
+                    </small>
+                </footer>
           </Card>
         ));
 

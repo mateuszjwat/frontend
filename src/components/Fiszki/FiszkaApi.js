@@ -27,6 +27,14 @@ const deleteFiszkaSet = (token, id) => {
     return axios.delete(API_URL + "deleteSet?id=" + id, makeHeader(token))
 }
 
+const publishFiszkaSet = (token, id) => {
+    return axios.post(API_URL + "makePublic?id=" + id, null ,  makeHeader(token))
+}
+
+const getPublic = () => {
+    return axios.get(API_URL + "public");
+}
+
 const test = (token) => {
     return axios.get(API_URL + "test", makeHeader(token));
 }
@@ -36,5 +44,7 @@ export default{
     myFiszkas,
     uploadFiszkaSet,
     getFiszkaFromUrl,
-    deleteFiszkaSet
+    deleteFiszkaSet,
+    publishFiszkaSet,
+    getPublic
 }

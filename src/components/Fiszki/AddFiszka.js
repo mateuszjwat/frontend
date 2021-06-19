@@ -1,10 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import {Card, Button, Carousel, Row, Col, Spinner, ButtonGroup, Badge} from 'react-bootstrap'
-import {LinkContainer} from 'react-router-bootstrap';
 import {useHistory} from 'react-router-dom'
 import FiszkaApi from './FiszkaApi';
-import { Jumbotron } from 'react-bootstrap';
+import { Jumbotron, Alert } from 'react-bootstrap';
   
 function AddFiszka (props){
 
@@ -14,8 +13,9 @@ function AddFiszka (props){
     }
 
     const [title, setTitle] = useState("");
+    const [alert, setAlert] = useState(false);
     const [description, setDescription] = useState("");
-    const [inputList, setInputList] = useState([{ face: "", reverse: "" }]);
+    const [inputList, setInputList] = useState([{ face: "", reverse: "" }, { face: "", reverse: "" }, { face: "", reverse: "" }, { face: "", reverse: "" }]);
 
     function validate(){
         for(let i = 0; i < inputList.length; i++){
@@ -36,7 +36,7 @@ function AddFiszka (props){
                 history.push('/myFiszkas');
             })
         } else {
-            //TODO
+            setAlert(true);
         }
     }
    
@@ -101,13 +101,18 @@ function AddFiszka (props){
                                     />
                                     <div >
                                     <ButtonGroup aria-label="Basic example">
-                                    {inputList.length !== 1 && <Button variant="secondary" onClick={(e) => handleRemoveClick(e, i)}>usuń</Button>}
+                                    {inputList.length > 4  && <Button variant="secondary" onClick={(e) => handleRemoveClick(e, i)}>usuń</Button>}
                                     {inputList.length - 1 === i && <Button variant="secondary" onClick={handleAddClick}>dodaj</Button>}
                                     </ButtonGroup>
                                     </div>
                                 </div>
                                 );
                             })}
+
+                            {alert ? <Alert variant="warning">
+                                Wszystkie pola muszą być wypełnione!
+                            </Alert> : <div></div>}
+                            
                             
                             <div class="float-right">
                                 <Button onClick={upload}>

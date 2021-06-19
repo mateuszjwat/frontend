@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import {Card, Button, Carousel, Row, Col, Spinner} from 'react-bootstrap'
+import {Card, Button, Tooltip, OverlayTrigger, Row, Col, Spinner} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap';
 import {useHistory} from 'react-router-dom'
 import FiszkaApi from './FiszkaApi';
@@ -8,6 +8,7 @@ import { Jumbotron , ButtonGroup} from 'react-bootstrap';
   
 function MyFiszkas (props){
     const [items, setItems] = useState(null);
+    const [uploaded, setUploaded] = useState([]);
 
     let history = useHistory();
     if(!props.user){
@@ -17,7 +18,7 @@ function MyFiszkas (props){
     if(items == null)    
         FiszkaApi.myFiszkas(props.user.token).then(res => {
             setItems(res.data);   
-    });
+        });
     
     function deleteSet(id){
         FiszkaApi.deleteFiszkaSet(props.user.token, id).then(res => {
@@ -27,11 +28,22 @@ function MyFiszkas (props){
         });
     }
 
+    function uploadSet(id){
+        FiszkaApi.publishFiszkaSet(props.user.token, id).then(res => {
+            if(res.status == 200){
+                let v = {};
+                v[id] = true;
+                setUploaded(v);
+           }
+       });
+    }
+
     function chooseSet(fiszka){
         console.log(fiszka);
         props.setFiszka(fiszka);
         history.push('/fiszkaSite');
     }
+
 
     if (items == null) {
     return (
@@ -60,16 +72,28 @@ function MyFiszkas (props){
                         onClick={() => chooseSet(item)}
                         variant="outline-dark"
                         size="lg">
-                        Choose Set
+                        Wybierz zestaw
                     </Button>
                     <Button
                         onClick={() => deleteSet(item.id)}
                         variant="outline-dark"
                         size="lg">
-                        Delete Set
+                        Usuń zestaw
                     </Button>
+                    <OverlayTrigger
+                        placement="bottom"
+                        show={uploaded[item.id]? true : false}
+                        overlay={<Tooltip>Zestaw upubliczniono!</Tooltip>}>
+                        <Button
+                            onClick={() => uploadSet(item.id)}
+                            variant="outline-dark"
+                            size="lg">
+                            Upublicznij zestaw
+                        </Button>
+                    </OverlayTrigger>
                 </ButtonGroup>
             </Card.Body>
+                
             </Card>
         ));
 
