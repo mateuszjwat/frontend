@@ -52,6 +52,14 @@ function Home (props){
     <div>
         <Jumbotron>
             {welcome}
+
+        <div >
+      <footer style={{float: 'right'}}>
+        <p className="text-muted h4">
+          Specjalne podziękowania dla <cite title="Source Title">Oli Kotuszewskiej</cite>
+        </p>
+      </footer>
+      </div>
         </Jumbotron>
         
         <h1 class="text-center display-4" style={{height:130}}> Zalety fiszek</h1>
