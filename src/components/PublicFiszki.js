@@ -3,10 +3,19 @@ import { useState } from 'react';
 import {Card, Button, Carousel, Row, Col, Spinner} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap';
 import {MyFetch} from './CustomFetch'
+import {useHistory} from 'react-router-dom'
   
-function PublicFiszki (){
+function PublicFiszki (props){
     const [items, setItems] = useState(null);
+    let history = useHistory();
+
       MyFetch("https://60c928797dafc90017ffc3bc.mockapi.io/api/fiszka", setItems);
+
+      function chooseSet(fiszka){
+        console.log(fiszka);
+        props.setFiszka(fiszka);
+        history.push('/fiszkaSite');
+    }
 
       if (items == null) {
         return (
@@ -26,13 +35,11 @@ function PublicFiszki (){
               <Card.Text>
                 {item.description}
               </Card.Text>
-              <LinkContainer to={`/fiszkaSet/${item.id}`}>
                 <Button
                   variant="outline-dark"
-                  size="lg">
+                  size="lg" onClick={() => chooseSet(item)}>
                   Choose Set
                 </Button>
-              </LinkContainer>
             </Card.Body>
           </Card>
         ));
