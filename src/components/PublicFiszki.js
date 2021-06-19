@@ -18,6 +18,7 @@ function PublicFiszki (props){
       if (items == null) {
         FiszkaApi.getPublic().then(res => {
           setItems(res.data);
+          console.log(res.data);
         })
 
 

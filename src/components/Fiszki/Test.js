@@ -4,7 +4,6 @@ import { useHistory, useParams } from "react-router-dom";
 import FiszkaApi from './FiszkaApi';
 import { Card , ButtonGroup, Row, Col, Container, ListGroup} from 'react-bootstrap';
 import { Button, ProgressBar , Badge} from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
 import '../../css/Test.css'
 import { Doughnut } from 'react-chartjs-2';
 
@@ -33,6 +32,33 @@ function FiszkaTest (props){
         setI(0);
     }
 
+    let end = <div></div>;
+    let gAns = 0;
+    let wAns = 0;
+    for(let j = 0; j < words.length; j++){
+        if(wrong[j])    
+            wAns+=1;
+    }
+    gAns = words.length - wAns;
+
+    function zakoncz(){
+        if(props.user){
+            let data = {
+                setId: props.fiszka.id,
+                setName: props.fiszka.title,
+                goodAns: gAns,
+                wrongAns: wAns
+            }
+
+            if(props.fiszka.template_id){
+                FiszkaApi.uploadStatistics(props.user.token, data);
+            } else {
+                FiszkaApi.updatePrivate(props.user.token, data);
+            }
+        }
+        history.push('/PublicFiszki');
+    }
+
     function repeatMistakes(){
         let badWords = [];
         for(let j = 0; j < words.length; j++){
@@ -40,6 +66,7 @@ function FiszkaTest (props){
                 badWords.push(words[j]);
         }
         
+        zakoncz();
         let temp = {...props.fiszka};
         temp.fiszkaCards = badWords;
         props.setFiszka(temp);
@@ -67,15 +94,6 @@ function FiszkaTest (props){
         }
         setNextButton(true);
     }
-
-    let end = <div></div>;
-    let gAns = 0;
-    let wAns = 0;
-    for(let j = 0; j < words.length; j++){
-        if(wrong[j])
-            wAns+=1;
-    }
-    gAns = words.length - wAns;
 
     if(i == words.length - 1 && nextButton){
         const data = {
@@ -168,7 +186,12 @@ function FiszkaTest (props){
                         </ButtonGroup>
                         <ProgressBar animated now={100 / words.length * (i + 1)} />
                         <div style={{height:60}}></div>
-                        {wAns > 0 && i == words.length - 1 && nextButton? <Button variant="danger" onClick={repeatMistakes}> Naucz się na błędach!</Button> : <div></div>}
+                        {wAns > 0 && i == words.length - 1 && nextButton? 
+                        <div>
+                            <Button variant="danger" onClick={repeatMistakes}> Naucz się na błędach!</Button>
+                        </div>
+                        : <div></div>}
+                        {i == words.length - 1 && nextButton? <Button variant="light" onClick={zakoncz}> Zakończ </Button>: <div></div>}
                     </div>
                        
                 </Col>

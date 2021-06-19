@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_URL = "https://test-app-demo-my.herokuapp.com/api/fiszka/"
+const API_USER_URL = "https://test-app-demo-my.herokuapp.com/api/user/"
 
 function makeHeader(token){
     const header = {
@@ -39,6 +40,14 @@ const test = (token) => {
     return axios.get(API_URL + "test", makeHeader(token));
 }
 
+const uploadStatistics = (token, data) => {
+    return axios.post(API_USER_URL + "postStatistic", data ,  makeHeader(token))
+}
+
+const updatePrivate = (token, data) => {
+    return axios.post(API_USER_URL + "updatePrivate", data ,  makeHeader(token))
+}
+
 export default{
     test,
     myFiszkas,
@@ -46,5 +55,7 @@ export default{
     getFiszkaFromUrl,
     deleteFiszkaSet,
     publishFiszkaSet,
-    getPublic
+    getPublic,
+    uploadStatistics,
+    updatePrivate
 }

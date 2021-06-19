@@ -8,6 +8,7 @@ import AddFiszka from './components/Fiszki/AddFiszka';
 import FiszkaSite from './components/Fiszki/FiszkaSite';
 import FiszkaLearn from './components/Fiszki/Learn';
 import FiszkaTest from './components/Fiszki/Test';
+import Profile from './components/Profile';
 
 import Login from './components/Login/Login';
 import SignUp from './components/Login/SignUp';
@@ -51,7 +52,10 @@ function App() {
           <FiszkaLearn fiszka={fiszka} setFiszka={setFiszka} />
         </Route>
         <Route path="/fiszkaTest">
-          <FiszkaTest fiszka={fiszka} setFiszka={setFiszka} />
+          <FiszkaTest fiszka={fiszka} setFiszka={setFiszka} user={user}/>
+        </Route>
+        <Route path="/profile">
+          <Profile user={user} />
         </Route>
       </Router>
     </div>

@@ -4,7 +4,7 @@ import {Card, Button, Tooltip, OverlayTrigger, Row, Col, Spinner} from 'react-bo
 import {LinkContainer} from 'react-router-bootstrap';
 import {useHistory} from 'react-router-dom'
 import FiszkaApi from './FiszkaApi';
-import { Jumbotron , ButtonGroup} from 'react-bootstrap';
+import { Jumbotron , ButtonGroup, ProgressBar} from 'react-bootstrap';
   
 function MyFiszkas (props){
     const [items, setItems] = useState(null);
@@ -60,7 +60,20 @@ function MyFiszkas (props){
             </Jumbotron>
         );
     } else {
-    const cards = items.map(item => (
+    const cards = items.map(item => {
+
+        let progress = <div></div>;
+        if(item.lastGood > 0 || item.lastWrong > 0){
+            console.log("pykło dla" + item.title);  
+            let all = item.lastGood + item.lastWrong;
+
+            progress = <ProgressBar>
+                            <ProgressBar striped animated={true} variant="success" now={100 / all * item.lastGood} />
+                            <ProgressBar striped animated={true} variant="danger" now={100 / all * item.lastWrong} />
+                        </ProgressBar>
+        }
+        
+        return(
             <Card style={{width:'auto'}}>
             <Card.Body>
                 <Card.Title>{item.title}</Card.Title>
@@ -92,10 +105,12 @@ function MyFiszkas (props){
                         </Button>
                     </OverlayTrigger>
                 </ButtonGroup>
+                <div style={{height:20}}></div>
+                {(item.lastGood > 0 || item.lastWrong > 0) && progress }
             </Card.Body>
-                
             </Card>
-        ));
+        );
+        });
 
         return (
             <div>
