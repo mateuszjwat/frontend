@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { useHistory, useParams } from "react-router-dom";
-import {MyFetch} from '../CustomFetch'
 import FiszkaApi from './FiszkaApi';
 import { Card , ButtonGroup, Row, Col, Container} from 'react-bootstrap';
 import { Button, ProgressBar } from 'react-bootstrap';

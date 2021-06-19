@@ -2,7 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import {Card, Button, Carousel, Row, Col, Spinner} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap';
-import {MyFetch} from './CustomFetch'
 import {useHistory} from 'react-router-dom'
 import FiszkaApi from './Fiszki/FiszkaApi';
   
