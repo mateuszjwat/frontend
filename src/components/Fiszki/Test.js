@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import FiszkaApi from './FiszkaApi';
 import { Card , ButtonGroup, Row, Col, Container, ListGroup} from 'react-bootstrap';
-import { Button, ProgressBar , Badge} from 'react-bootstrap';
+import { Button, ProgressBar} from 'react-bootstrap';
 import '../../css/Test.css'
 import { Doughnut } from 'react-chartjs-2';
 
