@@ -32,6 +32,10 @@ const publishFiszkaSet = (token, id) => {
     return axios.post(API_URL + "makePublic?id=" + id, null ,  makeHeader(token))
 }
 
+const unPublishFiszkaSet = (token, id) => {
+    return axios.post(API_URL + "unPublic?id=" + id, null ,  makeHeader(token))
+}
+
 const getPublic = () => {
     return axios.get(API_URL + "public");
 }
@@ -57,5 +61,6 @@ export default{
     publishFiszkaSet,
     getPublic,
     uploadStatistics,
-    updatePrivate
+    updatePrivate,
+    unPublishFiszkaSet
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, ListGroup, Table, ProgressBar, Row, Col, Container} from "react-bootstrap";
 import { Doughnut } from 'react-chartjs-2';
 import {useHistory} from 'react-router-dom'
@@ -25,12 +25,13 @@ function Profile (props){
 
     let history = useHistory();
 
-    if(data == null && props.user){
+
+    useEffect(() => {
         getProfile(props.user.token).then(res=>{
             setData(res.data);
             console.log(res.data);
         })
-    }
+      }, []);
 
     function handleCards(){
         history.push('/myFiszkas');
