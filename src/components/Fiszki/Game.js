@@ -62,7 +62,7 @@ function Game (props){
             let text="white";
 
             if(selected)
-            if(selected.word == word.word){
+            if(selected.word == word.word && selected.uniqId == word.uniqId){
                 theme="primary";
             }
 
