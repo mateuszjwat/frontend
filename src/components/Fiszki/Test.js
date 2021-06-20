@@ -1,11 +1,13 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import FiszkaApi from './FiszkaApi';
 import { Card , ButtonGroup, Row, Col, Container, ListGroup} from 'react-bootstrap';
 import { Button, ProgressBar} from 'react-bootstrap';
 import '../../css/Test.css'
 import { Doughnut } from 'react-chartjs-2';
+import { useRef } from 'react';
+import useKeypress from 'react-use-keypress';
 
 
 function FiszkaTest (props){
@@ -15,6 +17,19 @@ function FiszkaTest (props){
     const [znaczenie, setZnaczenie] = useState("");
     const [nextButton, setNextButton] = useState(false);
     const [wrong, setWrong] = useState([]);
+
+    useKeypress('Enter', () => {
+        if(nextButton && i < words.length - 1){
+            next();
+        }
+    });
+
+    const inputElement = useRef(null);
+    useEffect(() => {
+        if (inputElement.current) {
+        inputElement.current.focus();
+        }
+    }, []);
 
     if(props.fiszka == null){
         history.push('/PublicFiszki');
@@ -89,10 +104,13 @@ function FiszkaTest (props){
 
     function handleCheck(e){
         e.preventDefault();
-        if(znaczenie.toLowerCase() != words[i].reverse.toLowerCase()){
-            wrongAns();
+        if(znaczenie != ""){
+            if(znaczenie.toLowerCase() != words[i].reverse.toLowerCase()){
+                wrongAns();
+            }
+            setZnaczenie("");
+            setNextButton(true);
         }
-        setNextButton(true);
     }
 
     if(i == words.length - 1 && nextButton){
@@ -144,7 +162,7 @@ function FiszkaTest (props){
                                     <form>
                                     <ListGroup variant="dark">
                                         <ListGroup.Item variant="dark">
-                                            <input text="text" placeholder="wpisz znaczenie" autoFocus value={znaczenie} onChange={e=>{setZnaczenie(e.target.value)}}>
+                                            <input text="text" placeholder="wpisz znaczenie" autoFocus value={znaczenie} ref={inputElement} onChange={e=>{setZnaczenie(e.target.value)}}>
                                             </input>
                                         </ListGroup.Item>  
                                         <ListGroup.Item variant="dark">

@@ -42,7 +42,7 @@ function PublicFiszki (props){
                 <Button
                   variant="outline-dark"
                   size="lg" onClick={() => chooseSet(item)}>
-                  Choose Set
+                  Wybierz zestaw
                 </Button>
             </Card.Body>
                 <footer className="blockquote-footer pull-right">
@@ -67,19 +67,19 @@ function MyCarousel(){
       <Carousel class="text-light bg-dark">
         <Carousel.Item class="text-light bg-dark">
           <Carousel.Caption class="text-light bg-dark" style={{textAlign: "center"}}>
-            <h3>Welcome to Fiszki!</h3>
+            <h3> Witaj w świecie fiszek!</h3>
             <p><br/></p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <Carousel.Caption class="text-light bg-dark" style={{textAlign: "center"}}>
-            <h3>Choose your favourite</h3>
+            <h3>Wybierz swoje ulubione</h3>
             <p><br/></p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <Carousel.Caption class="text-light bg-dark" style={{textAlign: "center"}}>
-            <h3>Have fun :D</h3>
+            <h3>Baw się :D</h3>
             <p><br/></p>
           </Carousel.Caption>
         </Carousel.Item>

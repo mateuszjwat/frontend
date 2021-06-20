@@ -38,19 +38,19 @@ function Login (props){
                 <div style={{height:40}}></div>
                 <div style={{ display:'flex', justifyContent:'center' }}>
                 <Card style={{ width: '30rem' }}>
-                    <Card.Header>Welcome!</Card.Header>
+                    <Card.Header>Witaj!</Card.Header>
                     <Card.Body>
                         <form className="login-form" onSubmit={handleLogin} autoComplete="on">
-                            <h3 class='text-center'>Sign In</h3>
+                            <h3 class='text-center'>Zaloguj się</h3>
 
                             <div className="form-group">
-                                <label>Username</label>
-                                <input type="username" className="form-control" placeholder="Enter username" onChange={(e) => setUsername(e.target.value)}/>
+                                <label>Wpisz Username</label>
+                                <input type="username" className="form-control" placeholder="username" onChange={(e) => setUsername(e.target.value)}/>
                             </div>
 
                             <div className="form-group">
-                                <label>Password</label>
-                                <input type="password" className="form-control" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
+                                <label>Wpisz Hasło</label>
+                                <input type="password" className="form-control" placeholder="hasło" onChange={(e) => setPassword(e.target.value)} />
                             </div>
 
                             <button value="Login" type="submit" className="btn btn-primary btn-block">Submit</button>
@@ -60,8 +60,8 @@ function Login (props){
                             }
                             
                             <p className="forgot-password text-right">
-                                Don't have account? 
-                                <a href="/signUp">Sign up</a>
+                                Nie masz konta? 
+                                <a href="/signUp">Zarejestruj się</a>
                             </p>
                         </form>
                     </Card.Body>

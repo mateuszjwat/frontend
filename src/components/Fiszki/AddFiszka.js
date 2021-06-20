@@ -116,7 +116,7 @@ function AddFiszka (props){
                             
                             <div class="float-right">
                                 <Button onClick={upload}>
-                                    <Badge>Uploaduj zestaw!</Badge>
+                                    <Badge>Utwórz zestaw!</Badge>
                                 </Button>
                             </div>
 

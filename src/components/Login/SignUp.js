@@ -31,27 +31,27 @@ function SignUp (props){
                 <div style={{height:40}}></div>
                 <div style={{ display:'flex', justifyContent:'center' }}>
                 <Card style={{ width: '30rem' }}>
-                    <Card.Header>Sign Up!</Card.Header>
+                    <Card.Header>Zarejestruj się!</Card.Header>
                     <Card.Body>
                         <form onSubmit={handleLogin} autocomplete="on">
-                            <h3 class='text-center'>Make new account!</h3>
+                            <h3 class='text-center'>Stwórz nowe konto!</h3>
                             <br/>
 
                             <div className="form-group">
-                                <label>Enter your email address</label>
-                                <input type="email" className="form-control" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)} />
+                                <label>Wpisz adres email</label>
+                                <input type="email" className="form-control" placeholder="adres email" onChange={(e) => setEmail(e.target.value)} />
                             </div>
 
                             <div className="form-group" autoComplete="on">
-                                <label>Enter your username</label>
-                                <input type="username" className="form-control" placeholder="Enter username"  onChange={(e) => setUsername(e.target.value)}/>
+                                <label>Wpisz username</label>
+                                <input type="username" className="form-control" placeholder="username"  onChange={(e) => setUsername(e.target.value)}/>
                             </div>
 
                             <div className="form-group">
-                                <label>Enter new password</label>
-                                <input type="password" className="form-control" placeholder="Enter password"  onChange={(e) => setPassword(e.target.value)} />
+                                <label>Wpisz hasło</label>
+                                <input type="password" className="form-control" placeholder="hasło"  onChange={(e) => setPassword(e.target.value)} />
                             </div>
-                            <button className="btn btn-primary btn-block" type="submit">Sign Up</button>
+                            <button className="btn btn-primary btn-block" type="submit">Zarejestruj się</button>
                         </form>
                     </Card.Body>
                 </Card>

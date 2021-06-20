@@ -70,7 +70,7 @@ function Additional({setFiszka}){
                     <Button
                         variant="outline-dark"
                         size="lg" onClick={() => chooseSet(item)}>
-                        Choose Set
+                        Wybierz zestaw
                     </Button>
                 </Card.Body>
                     <footer className="blockquote-footer pull-right">
