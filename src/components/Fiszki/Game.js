@@ -45,8 +45,8 @@ function Game (props){
         let faces = [];
         let reverses = [];
         words.map(word => {
-            let face = {word: word.face, id: word.id};
-            let reverse = {word: word.reverse, id: word.id};
+            let face = {word: word.face, id: word.id, uniqId: "face"};
+            let reverse = {word: word.reverse, id: word.id, uniqId: "reverse"};
             faces.push(face);
             reverses.push(reverse);
         });
@@ -57,7 +57,7 @@ function Game (props){
     }
 
     else{
-        allCards = cards.map((word, index) => {
+        allCards = cards.map((word) => {
             let theme="secondary";
             let text="white";
 
@@ -141,7 +141,7 @@ function Game (props){
             setSelected(word);
             setWrong(null);
         }else{
-            if(word.id == selected.id && selected.word != word.word){
+            if(word.id == selected.id && selected.uniqId != word.uniqId){
                 let c = cards;
                 let index = c.indexOf(selected);
                 c.splice(index, 1);

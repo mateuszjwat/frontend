@@ -89,7 +89,7 @@ function FiszkaTest (props){
 
     function handleCheck(e){
         e.preventDefault();
-        if(znaczenie != words[i].reverse){
+        if(znaczenie.toLowerCase() != words[i].reverse.toLowerCase()){
             wrongAns();
         }
         setNextButton(true);
