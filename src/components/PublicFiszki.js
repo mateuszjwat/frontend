@@ -4,9 +4,12 @@ import {Card, Button, Carousel, Row, Col, Spinner} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap';
 import {useHistory} from 'react-router-dom'
 import FiszkaApi from './Fiszki/FiszkaApi';
-  
+import useWindowDimensions from './WindowsDim';
+import BuildCards from './Fiszki/BuildCards';
+
 function PublicFiszki (props){
     const [items, setItems] = useState(null);
+    const {height, width} = useWindowDimensions();
     let history = useHistory();
 
     function chooseSet(fiszka){
@@ -32,7 +35,7 @@ function PublicFiszki (props){
       } else {
 
         const cards = items.map(item => (
-          <Card style={{width:'auto'}}>
+          <Card style={{width:'auto'}} className="addShadow">
             {/*<Card.Img variant="top" src="holder.js/100px180" />  image placeholder*/}
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>
@@ -56,7 +59,7 @@ function PublicFiszki (props){
         return (
           <div>
               <MyCarousel/>
-              <BuildCards cards={cards}/>
+              <BuildCards cards={cards} width={width}/>
           </div>
         );
       }
@@ -86,24 +89,4 @@ function MyCarousel(){
       </Carousel>);
 }
 
-function BuildCards({cards}){
-  const resultsRender = [];
-
-   for(let i = 0; i < cards.length; i+=4){
-     resultsRender.push(
-        <Row lg='4' md='1' sm='1' xs='1'>
-        {
-          cards.slice(i, i + 4)
-            .map(card => (
-              <Col>
-                {card}
-              </Col>
-            ))
-        }
-        </Row>
-      );
-   }
-   return resultsRender;
-}
-  
 export default PublicFiszki;

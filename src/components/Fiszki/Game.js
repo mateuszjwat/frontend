@@ -6,6 +6,8 @@ import { Card , ButtonGroup, Row, Col, Container} from 'react-bootstrap';
 import { Jumbotron, ProgressBar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import Additional from './Additional';
+import useWindowDimensions from '../WindowsDim';
+import BuildCards from './BuildCards';
 
 function shuffle(array) {
     var currentIndex = array.length,  randomIndex;
@@ -32,6 +34,7 @@ function Game (props){
     const [cards, setCards] = useState(null);
     const [selected, setSelected] = useState(null);
     const [content, setContent] = useState(<div></div>)
+    const {height, width} = useWindowDimensions();
 
     if(props.fiszka == null){
         history.push('/PublicFiszki');
@@ -74,7 +77,7 @@ function Game (props){
 
             return (
                 <a style={{ cursor: 'pointer' }} onClick={() => {handleClick(word)}}>
-                    <Card bg={theme} text={text} style={{ width: 'auto' , height: 200}}  >
+                    <Card bg={theme} text={text} style={{ width: 'auto' , height: 200}} className="addShadow" >
                         <Card.Header></Card.Header>
                         <Card.Body >
                                 <Card.Text  className="align-items-center">
@@ -87,30 +90,6 @@ function Game (props){
             );
         })
     }
-    
-
-    function BuildCards({cards}){
-        const resultsRender = [];
-      
-         for(let i = 0; i < cards.length; i+=4){
-           resultsRender.push(
-               <div>
-               <div style={{height:15}}></div>
-              <Row lg='4' md='3' sm='1' xs='1'>
-              {
-                cards.slice(i, i + 4)
-                  .map(card => (
-                    <Col>
-                      {card}
-                    </Col>
-                  ))
-              }
-              </Row>
-              </div>
-            );
-         }
-         return resultsRender;
-    }
 
     if(allCards == null || cards == null){
         return <div></div>
@@ -119,7 +98,7 @@ function Game (props){
     return (
         <div>
             <div style={{height:60}}></div>
-            {BuildCards({cards:allCards})}
+            {BuildCards({cards:allCards, width:width})}
         </div>
     );
     else{
@@ -157,5 +136,7 @@ function Game (props){
         }
     }
 }
+
+
   
 export default Game;

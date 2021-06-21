@@ -5,6 +5,7 @@ import FiszkaApi from './FiszkaApi';
 import { Card , Row, Spinner, Col, Table} from 'react-bootstrap';
 import { Button , ButtonGroup, Jumbotron} from 'react-bootstrap';
 import Additional from './Additional';
+import { blue, lightBlue } from '@material-ui/core/colors';
 
 
 
@@ -25,6 +26,14 @@ function FiszkaSite (props){
         history.push('/game');
     }
 
+    function flipWords(){
+        let fiszka = {...props.fiszka};
+        for(let i = 0; i < fiszka.fiszkaCards.length; i++){
+            [fiszka.fiszkaCards[i].face, fiszka.fiszkaCards[i].reverse] = [fiszka.fiszkaCards[i].reverse, fiszka.fiszkaCards[i].face]
+        }
+        props.setFiszka(fiszka);
+    }
+
     if(props.fiszka == null){
         history.push('/PublicFiszki');
         return <div></div> //to prevent error
@@ -32,10 +41,11 @@ function FiszkaSite (props){
     else{
         let words = props.fiszka.fiszkaCards;
         return (
-            <div  className="p-3 mb-2 bg-light text-dark">
+
+            <div>
                 <div style={{height:60}}></div>
                 <div style={{ display:'flex', justifyContent:'center' }}>
-                    <Card style={{ width: '30rem' }}>
+                    <Card style={{ width: '30rem' }} className="addShadow">
                         <Card.Body>
                             <Card.Title>{props.fiszka.title}</Card.Title>
                             <Table striped bordered hover variant="dark">
@@ -65,12 +75,13 @@ function FiszkaSite (props){
                                     Test
                                 </Button>
                             </ButtonGroup>
+                            <Button className="float-right" onClick={flipWords}>Odwróć słowa</Button>
                         </Card.Body>
                     </Card>
                 </div>
                 <div style={{height:40}}></div>
 
-                <Additional/>
+                <Additional setFiszka={props.setFiszka}/>
 
             </div>
         );

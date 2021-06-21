@@ -153,7 +153,7 @@ function FiszkaTest (props){
             <div class="test-flip-card">
                 <div class={cssInner}>
                     <div class="test-flip-card-front">
-                        <Card bg="secondary" text="white" style={{ width: 300, height: 300 }}>
+                        <Card bg="secondary" text="white" style={{ width: 300, height: 300 }} className="addShadow">
                             <Card.Body>
                                 <Card.Header>Test</Card.Header>
                                     <Card.Text className="align-items-center">

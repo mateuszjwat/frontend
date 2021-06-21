@@ -129,7 +129,7 @@ function FiszkaLearn (props){
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <Card bg={theme} text={text} style={{ width: 300, height: 300 }}>
+                        <Card bg={theme} text={text} style={{ width: 300, height: 300 }} className="addShadow">
                             <Card.Body>
                                 <Card.Header>Nauka</Card.Header>
                                     <Card.Text className="align-items-center">
@@ -139,14 +139,16 @@ function FiszkaLearn (props){
                         </Card>
                     </div>
                     <div class="flip-card-back">
-                        <Card bg={theme} text={text} style={{ width: 300, height: 300 }}>
+                        <Card bg={theme} text={text} style={{ width: 300, height: 300 }} className="addShadow">
                             <Card.Body>
                                 <Card.Header>Nauka</Card.Header>
                                     <Card.Text className="align-items-center">
                                         <h4>{card["reverse"]}</h4>
                                     </Card.Text>    
                             </Card.Body>
-                            <Card.Footer> <Button onClick={wrongAns} variant="danger">nie wiedziałeś/aś?</Button></Card.Footer>
+                            <Card.Footer> 
+                                <Button className="button-learn" onClick={wrongAns} variant="danger">powtórz</Button>
+                            </Card.Footer>
                         </Card>
                     </div>
                 </div>

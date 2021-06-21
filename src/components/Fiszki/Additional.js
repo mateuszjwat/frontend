@@ -6,11 +6,11 @@ import { useState, useEffect } from "react";
 function BuildCards({cards}){
     const resultsRender = [];
   
-     for(let i = 0; i < cards.length; i+=4){
+     for(let i = 0; i < cards.length; i+=3){
        resultsRender.push(
-          <Row lg='4' md='1' sm='1' xs='1'>
+          <Row lg='3' md='3' sm='1' xs='1'>
           {
-            cards.slice(i, i + 4)
+            cards.slice(i, i + 3)
               .map(card => (
                 <Col>
                   {card}
@@ -60,8 +60,7 @@ function Additional({setFiszka}){
             }
 
             const cardSet = c.map(item => (
-                <Card style={{width:'auto'}}>
-                {/*<Card.Img variant="top" src="holder.js/100px180" />  image placeholder*/}
+                <Card style={{width:'auto'}} className="addShadow">
                 <Card.Body>
                     <Card.Title>{item.title}</Card.Title>
                     <Card.Text>

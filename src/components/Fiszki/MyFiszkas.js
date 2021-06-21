@@ -5,25 +5,30 @@ import {LinkContainer} from 'react-router-bootstrap';
 import {useHistory} from 'react-router-dom'
 import FiszkaApi from './FiszkaApi';
 import { Jumbotron , ButtonGroup, ProgressBar} from 'react-bootstrap';
+import useWindowDimensions from '../WindowsDim';
+import BuildCards from './BuildCards';
   
 function MyFiszkas (props){
     const [items, setItems] = useState(null);
     const [publicFiszkas, setPublicFiszkas] = useState(null);
     const [uploaded, setUploaded] = useState([]);
+    const {height, width} = useWindowDimensions();
 
     let history = useHistory();
     if(!props.user){
         history.push('/login');
     }
-
+    
 
     useEffect(() => {
         FiszkaApi.getPublic().then(res => {
             setPublicFiszkas(res.data);
         });
-        FiszkaApi.myFiszkas(props.user.token).then(res => {
-            setItems(res.data);   
-        });
+        if(props.user){
+            FiszkaApi.myFiszkas(props.user.token).then(res => {
+                setItems(res.data);   
+            });
+        }
     }, []); 
         
     
@@ -101,23 +106,24 @@ function MyFiszkas (props){
         }
         
         return(
-            <Card style={{width:'auto'}}>
+            <div className="fiszkas">
+            <Card className="addShadow">
             <Card.Body>
                 <Card.Title>{item.title}</Card.Title>
                 <Card.Text>
                 {item.description}
                 </Card.Text>
-                <ButtonGroup>
+                <ButtonGroup size="sm">
                     <Button
                         onClick={() => chooseSet(item)}
                         variant="outline-dark"
-                        size="lg">
+                        >
                         Wybierz zestaw
                     </Button>
                     <Button
                         onClick={() => deleteSet(item.id)}
                         variant="outline-dark"
-                        size="lg">
+                        >
                         Usuń zestaw
                     </Button>
                     {isPrivate ? 
@@ -128,7 +134,7 @@ function MyFiszkas (props){
                             <Button
                                 onClick={() => uploadSet(item.id)}
                                 variant="outline-dark"
-                                size="lg">
+                                >
                                 Upublicznij zestaw
                             </Button>
                         </OverlayTrigger>
@@ -140,7 +146,7 @@ function MyFiszkas (props){
                             <Button
                                 onClick={() => deUploadSet(item.id)}
                                 variant="outline-dark"
-                                size="lg">
+                                >
                                 Odpublicznij zestaw
                             </Button>
                         </OverlayTrigger>
@@ -150,6 +156,7 @@ function MyFiszkas (props){
                 {(item.lastGood > 0 || item.lastWrong > 0) && progress }
             </Card.Body>
             </Card>
+            </div>
         );
         });
 
@@ -160,31 +167,11 @@ function MyFiszkas (props){
                     <a>Stwórz nowy zestaw!</a>
                     </LinkContainer>
                 </Jumbotron>
-                <BuildCards cards={cards}/>
+                <BuildCards cards={cards} width={width}/>
             </div>
         );
     }
 }
 
-
-function BuildCards({cards}){
-  const resultsRender = [];
-
-   for(let i = 0; i < cards.length; i+=4){
-     resultsRender.push(
-        <Row lg='4' md='1' sm='1' xs='1'>
-        {
-          cards.slice(i, i + 4)
-            .map(card => (
-              <Col>
-                {card}
-              </Col>
-            ))
-        }
-        </Row>
-      );
-   }
-   return resultsRender;
-}
   
 export default MyFiszkas;
