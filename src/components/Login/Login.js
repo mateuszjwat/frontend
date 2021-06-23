@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import {Button, Card} from 'react-bootstrap'
+import {Spinner, Card} from 'react-bootstrap'
 import LoginFetch from './LoginFetch';
 import { Alert } from 'react-bootstrap';
 import {useHistory} from 'react-router-dom'
@@ -16,10 +16,13 @@ function Login (props){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorForm, setErrorForm] = useState(false);
+    const [loading, setLoading] = useState(false);
 
 
     function handleLogin(e){
         e.preventDefault();
+        setLoading(true);
+
         LoginFetch.login(username, password).then(response => {
             let newUser = {
                 username: username,
@@ -31,6 +34,7 @@ function Login (props){
             console.log(newUser.token);
         }).catch(err => {
             setErrorForm(true);
+            setLoading(false);
             console.log("złe passwordy");
         });
     }
@@ -43,6 +47,10 @@ function Login (props){
                 <Card style={{ width: '30rem' }}>
                     <Card.Header>Witaj!</Card.Header>
                     <Card.Body>
+                    {loading &&
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>}
                         <form className="login-form" onSubmit={handleLogin} autoComplete="on">
                             <h3 class='text-center'>Zaloguj się</h3>
 

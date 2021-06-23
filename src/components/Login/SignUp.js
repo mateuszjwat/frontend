@@ -1,4 +1,4 @@
-import {Button, Card} from 'react-bootstrap'  
+import {Spinner, Card, Alert} from 'react-bootstrap'  
 import React, { useState } from 'react'
 import {useHistory} from 'react-router-dom'
 import LoginFetch from './LoginFetch';
@@ -15,15 +15,19 @@ function SignUp (props){
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [errorForm, setErrorForm] = useState(false);
+    const [loading, setLoading] = useState(false);
 
 
     const handleLogin = (e) => {
         e.preventDefault();
+        setLoading(true);
         LoginFetch.register(email, username, password).then((response) => {
             if(response.status == 200){
                 history.push('/login');
             }
         }).catch(err => {
+            setLoading(false);
+            setErrorForm(true);
             console.log(err.response.data);
         });
     };
@@ -36,6 +40,10 @@ function SignUp (props){
                 <Card style={{ width: '30rem' }}>
                     <Card.Header>Zarejestruj się!</Card.Header>
                     <Card.Body>
+                        {loading &&
+                        <Spinner animation="border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner>}
                         <form onSubmit={handleLogin} autocomplete="on">
                             <h3 class='text-center'>Stwórz nowe konto!</h3>
                             <br/>
@@ -56,6 +64,10 @@ function SignUp (props){
                             </div>
                             <button className="btn btn-primary btn-block" type="submit">Zarejestruj się</button>
                         </form>
+                        {errorForm
+                                ? <Alert variant="danger"> Username zajęty! </Alert>
+                                : <br/>
+                        }
                     </Card.Body>
                 </Card>
                 </div>
