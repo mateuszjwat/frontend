@@ -5,10 +5,13 @@ import { Card , ButtonGroup, Row, Col, Container} from 'react-bootstrap';
 import { Button, ProgressBar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import '../../css/Learn.css'
+import useChangeTitle from '../ChangeTitle';
 
 
 function FiszkaLearn (props){
     let history = useHistory();
+
+    useChangeTitle("Fiszki-nauka");
 
     const [i, setI] = useState(0);
     const [wrong, setWrong] = useState([]);

@@ -7,12 +7,15 @@ import FiszkaApi from './FiszkaApi';
 import { Jumbotron , ButtonGroup, ProgressBar} from 'react-bootstrap';
 import useWindowDimensions from '../WindowsDim';
 import BuildCards from './BuildCards';
+import useChangeTitle from '../ChangeTitle';
   
 function MyFiszkas (props){
     const [items, setItems] = useState(null);
     const [publicFiszkas, setPublicFiszkas] = useState(null);
     const [uploaded, setUploaded] = useState([]);
     const {height, width} = useWindowDimensions();
+
+    useChangeTitle("Moje fiszki");
 
     let history = useHistory();
     if(!props.user){

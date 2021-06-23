@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Card, ListGroup, Table, ProgressBar, Row, Col, Container} from "react-bootstrap";
 import { Doughnut } from 'react-chartjs-2';
 import {useHistory} from 'react-router-dom'
+import useChangeTitle from "./ChangeTitle";
 
 const API_URL = "https://test-app-demo-my.herokuapp.com/api/user/"
 
@@ -23,6 +24,7 @@ function getProfile(token){
 function Profile (props){
     const [data, setData] = useState(null);
 
+    useChangeTitle("Fiszki Profil");
     let history = useHistory();
 
 

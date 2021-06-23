@@ -6,11 +6,18 @@ import { Card , Row, Spinner, Col, Table} from 'react-bootstrap';
 import { Button , ButtonGroup, Jumbotron} from 'react-bootstrap';
 import Additional from './Additional';
 import { blue, lightBlue } from '@material-ui/core/colors';
+import useChangeTitle from '../ChangeTitle';
 
 
 
 function FiszkaSite (props){
     let history = useHistory();
+
+    let title = "Fiszki-app";
+    if(props.fiszka)
+        title = props.fiszka.title
+
+    useChangeTitle(title);
 
     const [cards, setCards] = useState(null);
 

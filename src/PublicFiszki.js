@@ -1,16 +1,18 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {Card, Button, Carousel, Row, Col, Spinner} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap';
 import {useHistory} from 'react-router-dom'
 import FiszkaApi from './Fiszki/FiszkaApi';
 import useWindowDimensions from './WindowsDim';
 import BuildCards from './Fiszki/BuildCards';
+import useChangeTitle from './ChangeTitle';
 
 function PublicFiszki (props){
     const [items, setItems] = useState(null);
     const {height, width} = useWindowDimensions();
     let history = useHistory();
+    useChangeTitle("Fiszki publiczne");
 
     function chooseSet(fiszka){
       console.log(fiszka);

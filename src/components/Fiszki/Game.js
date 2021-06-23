@@ -8,6 +8,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Additional from './Additional';
 import useWindowDimensions from '../WindowsDim';
 import BuildCards from './BuildCards';
+import useChangeTitle from '../ChangeTitle';
 
 function shuffle(array) {
     var currentIndex = array.length,  randomIndex;
@@ -29,6 +30,7 @@ function shuffle(array) {
 
 function Game (props){
     let history = useHistory();
+    useChangeTitle("Fiszki-gra");
 
     const [wrong, setWrong] = useState([]);
     const [cards, setCards] = useState(null);

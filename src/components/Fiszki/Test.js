@@ -8,9 +8,11 @@ import '../../css/Test.css'
 import { Doughnut } from 'react-chartjs-2';
 import { useRef } from 'react';
 import useKeypress from 'react-use-keypress';
+import useChangeTitle from '../ChangeTitle';
 
 
 function FiszkaTest (props){
+    useChangeTitle("Fiszki-test");
     let history = useHistory();
 
     const [i, setI] = useState(0);

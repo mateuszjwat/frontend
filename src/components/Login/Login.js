@@ -4,11 +4,14 @@ import {Button, Card} from 'react-bootstrap'
 import LoginFetch from './LoginFetch';
 import { Alert } from 'react-bootstrap';
 import {useHistory} from 'react-router-dom'
+import useChangeTitle from '../ChangeTitle';
 
 
 function Login (props){
 
     let history = useHistory();
+
+    useChangeTitle("Fiszki Login");
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
