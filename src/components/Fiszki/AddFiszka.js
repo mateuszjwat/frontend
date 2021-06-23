@@ -4,6 +4,7 @@ import {Card, Button, Carousel, Row, Col, Spinner, ButtonGroup, Badge} from 'rea
 import {useHistory} from 'react-router-dom'
 import FiszkaApi from './FiszkaApi';
 import { Jumbotron, Alert } from 'react-bootstrap';
+import useChangeTitle from '../ChangeTitle';
   
 function AddFiszka (props){
 
@@ -11,6 +12,8 @@ function AddFiszka (props){
     if(!props.user){
         history.push('/login');
     }
+
+    useChangeTitle("Dodaj zestaw");
 
     const [title, setTitle] = useState("");
     const [alert, setAlert] = useState(false);

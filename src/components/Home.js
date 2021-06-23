@@ -6,7 +6,7 @@ import useChangeTitle from './ChangeTitle';
 
 function Home (props){
 
-    useChangeTitle();
+    useChangeTitle("Fiszki-app");
 
     let welcome;
     if(props.user){
