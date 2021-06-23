@@ -59,20 +59,6 @@ function FiszkaTest (props){
     gAns = words.length - wAns;
 
     function zakoncz(){
-        if(props.user){
-            let data = {
-                setId: props.fiszka.id,
-                setName: props.fiszka.title,
-                goodAns: gAns,
-                wrongAns: wAns
-            }
-
-            if(props.fiszka.template_id){
-                FiszkaApi.uploadStatistics(props.user.token, data);
-            } else {
-                FiszkaApi.updatePrivate(props.user.token, data);
-            }
-        }
         history.push('/PublicFiszki');
     }
 
@@ -112,6 +98,21 @@ function FiszkaTest (props){
             }
             setZnaczenie("");
             setNextButton(true);
+
+            if(i == words.length - 1){
+                let data = {
+                    setId: props.fiszka.id,
+                    setName: props.fiszka.title,
+                    goodAns: gAns,
+                    wrongAns: wAns
+                }
+
+                if(props.fiszka.template_id){
+                    FiszkaApi.uploadStatistics(props.user.token, data);
+                } else {
+                    FiszkaApi.updatePrivate(props.user.token, data);
+                }
+            }
         }
     }
 
