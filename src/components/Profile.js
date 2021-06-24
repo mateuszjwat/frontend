@@ -5,7 +5,7 @@ import { Doughnut } from 'react-chartjs-2';
 import {useHistory} from 'react-router-dom'
 import useChangeTitle from "./ChangeTitle";
 
-const API_URL = "https://test-app-demo-my.herokuapp.com/api/user/"
+const API_URL = "http://localhost:8080/api/user/"
 
 function makeHeader(token){
     const header = {

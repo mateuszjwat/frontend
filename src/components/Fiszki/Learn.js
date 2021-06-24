@@ -70,7 +70,7 @@ function FiszkaLearn (props){
         if(b){
             end = (
                 <div>
-                    <LinkContainer to="/fiszkaSite">
+                    <LinkContainer to="/PublicFiszki">
                         <Button>Zakończ naukę</Button>
                     </LinkContainer>
                     <Button variant="outline-danger" onClick={repeatMistakes}>Powtórz błędy</Button>
@@ -79,7 +79,7 @@ function FiszkaLearn (props){
         }
         else{
             end = (
-                <LinkContainer to="/fiszkaSite">
+                <LinkContainer to="/PublicFiszki">
                     <Button>Zakończ naukę</Button>
                 </LinkContainer>
             );

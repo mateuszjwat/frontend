@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const API_URL = "https://test-app-demo-my.herokuapp.com/api/fiszka/"
-const API_USER_URL = "https://test-app-demo-my.herokuapp.com/api/user/"
+const API = "http://localhost:8080"
+const API_URL = API + "/api/fiszka/"
+const API_USER_URL = API + "/api/user/"
 
 function makeHeader(token){
     const header = {

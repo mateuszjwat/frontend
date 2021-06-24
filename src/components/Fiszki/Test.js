@@ -50,13 +50,15 @@ function FiszkaTest (props){
     }
 
     let end = <div></div>;
-    let gAns = 0;
-    let wAns = 0;
-    for(let j = 0; j < words.length; j++){
-        if(wrong[j])    
-            wAns+=1;
+
+    function countWrong(){
+        let wAns = 0;
+        for(let j = 0; j < words.length; j++){
+            if(wrong[j])    
+                wAns+=1;
+        }
+        return wAns;
     }
-    gAns = words.length - wAns;
 
     function zakoncz(){
         history.push('/PublicFiszki');
@@ -93,11 +95,14 @@ function FiszkaTest (props){
     function handleCheck(e){
         e.preventDefault();
         if(znaczenie != ""){
+            let wAns = countWrong();
             if(znaczenie.toLowerCase() != words[i].reverse.toLowerCase()){
                 wrongAns();
+                wAns++;
             }
             setZnaczenie("");
             setNextButton(true);
+            let gAns = words.length - wAns;
 
             if(i == words.length - 1){
                 let data = {
@@ -117,6 +122,8 @@ function FiszkaTest (props){
     }
 
     if(i == words.length - 1 && nextButton){
+        let wAns = countWrong();
+        let gAns = words.length - wAns;
         const data = {
             labels: [
               'Złe odpowiedzi',
@@ -192,6 +199,9 @@ function FiszkaTest (props){
             </div>
         );
     }
+
+    let wAns = countWrong();
+    let gAns = words.length - wAns;
 
     return (
         <div>
