@@ -65,7 +65,7 @@ function SignUp (props){
                             <button className="btn btn-primary btn-block" type="submit">Zarejestruj się</button>
                         </form>
                         {errorForm
-                                ? <Alert variant="danger"> Username zajęty! </Alert>
+                                ? <Alert variant="danger"> Username zajęty, lub zbyt krótkie hasło (min. 6 znaków)! </Alert>
                                 : <br/>
                         }
                     </Card.Body>
