@@ -15,7 +15,6 @@ function PublicFiszki (props){
     useChangeTitle("Fiszki publiczne");
 
     function chooseSet(fiszka){
-      console.log(fiszka);
       props.setFiszka(fiszka);
       history.push('/fiszkaSite');
     }
@@ -23,9 +22,7 @@ function PublicFiszki (props){
       if (items == null) {
         FiszkaApi.getPublic().then(res => {
           setItems(res.data);
-          console.log(res.data)
         })
-
 
         return (
         <div>
