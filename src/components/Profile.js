@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import { Card, ListGroup, Table, ProgressBar, Row, Col, Container} from "react-bootstrap";
+import { Card, ListGroup, Table, ProgressBar, Row, Col, Container, OverlayTrigger, Tooltip} from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import { Doughnut } from 'react-chartjs-2';
 import {useHistory} from 'react-router-dom'
 import useChangeTitle from "./ChangeTitle";
+import LoginFetch from "./Login/LoginFetch"
 
 const API_URL = "https://test-app-demo-my.herokuapp.com/api/user/"
 
@@ -23,20 +25,35 @@ function getProfile(token){
 
 function Profile (props){
     const [data, setData] = useState(null);
+    const [showChangePassword, setShowChangePassword] = useState(false);
+    const [password, setPassword] = useState("");
 
     useChangeTitle("Fiszki Profil");
     let history = useHistory();
 
-
     useEffect(() => {
+        if(props.user)
         getProfile(props.user.token).then(res=>{
             setData(res.data);
-            console.log(res.data);
         })
       }, []);
 
     function handleCards(){
         history.push('/myFiszkas');
+    }
+
+    function handleChangePassword(){
+        setShowChangePassword(!showChangePassword);
+    }
+
+    function handleNewPassword(e){
+        e.preventDefault();
+        LoginFetch.changePassword(props.user.token, password).then(res => {
+            setShowChangePassword(false);
+            alert("Hasło zostało zmienione!");
+        }).catch(err => {
+            alert("Hasło musi mieć przynajamniej 6 znaków!");
+        })
     }
 
     if(data){
@@ -52,7 +69,6 @@ function Profile (props){
         }
 
         if(wrong == 0 && good == 0){
-            console.log("wejszło");
             noPrivate = true;
         }
 
@@ -89,6 +105,19 @@ function Profile (props){
                         <Card.Header><b>Username:</b> {data.username}</Card.Header>
                         <Card.Header> <b>Email:</b> {data.email}</Card.Header>
                         <ListGroup variant="flush">
+                            <OverlayTrigger
+                                placement="right"
+                                show={showChangePassword}
+                                overlay={
+                                <Tooltip>
+                                <Form>
+                                    <Form.Label>Wpisz nowe hasło</Form.Label>
+                                    <Form.Control type="password" placeholder="nowe hasło" onChange={(e) => setPassword(e.target.value)}/>
+                                    <Button variant="dark" onClick={(e) => handleNewPassword(e)}>Zmień</Button>
+                                </Form>
+                                </Tooltip>}>
+                                <ListGroup.Item action onClick={handleChangePassword}>Zmień hasło</ListGroup.Item>
+                            </OverlayTrigger>
                             <ListGroup.Item action onClick={handleCards}>Ilość zestawów prywatnych: {data.myFiszkaSets.length}</ListGroup.Item>
                             <ListGroup.Item>
                                 Odpowiedzi łącznie:
